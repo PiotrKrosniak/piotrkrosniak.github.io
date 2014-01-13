@@ -16,75 +16,108 @@
  type="text/css" />
   <script type="text/javascript">
 function initialize() {
-var myLatLng = new google.maps.LatLng(4.9878199334447695, 53.7890625);
-map = new google.maps.Map(document.getElementById('map_canvas'), {
-center: myLatLng,
-zoom: 3,
-panControl: false,
-zoomControl: true,
-zoomControlOptions: {
-position: google.maps.ControlPosition.LEFT_CENTER
-},
-mapTypeControl: false,
-mapTypeId: 'roadmap'
-});
-// Replace the xxx with your Fusion Tables IDs. //You can use FT Wizard http://fusion-tables-api-samples.googlecode.com/svn/trunk/FusionTablesLayerWizard/src/index.html
+	var myLatLng = new google.maps.LatLng(4.9878199334447695, 53.7890625);
+	map = new google.maps.Map(document.getElementById('map_canvas'), {
+    center: myLatLng,
+    zoom: 3,
+	panControl: false,
+  	zoomControl: true,
+	zoomControlOptions: {
+    position: google.maps.ControlPosition.LEFT_CENTER
+    },
+  	mapTypeControl: false,
+      mapTypeId: 'roadmap'
+    });
+	// Replace the xxx with your Fusion Tables IDs. 
+	//You can use FT Wizard http://fusion-tables-api-samples.googlecode.com/svn/trunk/FusionTablesLayerWizard/src/index.html
 layer1 = new google.maps.FusionTablesLayer({
-query: {
-select: 'Geometry',
-from: '1RVM0V4BN7KUdxxAV9lBtQKy9Wqd804_RdE78Dsc'
-},
-styleId: 2,
-templateId: 2,
-map: map, });
+      query: {
+        select: 'Geometry',
+        from: '1RVM0V4BN7KUdxxAV9lBtQKy9Wqd804_RdE78Dsc'
+      },
+        styleId: 2,
+        templateId: 2,
+      map: map, 
+    });
+	
 layer2 = new google.maps.FusionTablesLayer({
-query: {
-select: 'Geometry',
-from: '1bcMsQeHuheCfNTqKVy9AD3U_-fJrmxExomI4Rcc'
-},
-styleId: 2,
-templateId: 2,
-map: map, });
+      query: {
+        select: 'Geometry',
+        from: '1bcMsQeHuheCfNTqKVy9AD3U_-fJrmxExomI4Rcc'
+       },
+        styleId: 2,
+        templateId: 2,
+      map: map, 
+    });
+
 layer3 = new google.maps.FusionTablesLayer({
-query: {
-select: 'Geometry',
-from: '1RACoMD3bIs95_IKQvRx43k6XtWl04jSxcDQnj6Y'
-},
-styleId: 2,
-templateId: 2,
-map: map, });
+      query: {
+        select: 'Geometry',
+        from: '1RACoMD3bIs95_IKQvRx43k6XtWl04jSxcDQnj6Y'
+       },
+        styleId: 2,
+        templateId: 2,
+      map: map, 
+    });
+
 layer4 = new google.maps.FusionTablesLayer({
-query: {
-select: 'Geometry',
-from: '1h0bOmdeqAa8jHQbCYAKTvURfZ-tTAHBx89E4buw'
-},
-styleId: 2,
-templateId: 2,
-map: map, });
+      query: {
+        select: 'Geometry',
+        from: '1k_Nnxq88xakXVB4Yi1-10W-y2_gcF5JdpI3Drow'
+       },
+        styleId: 2,
+        templateId: 2,
+      map: map, 
+    });
+
+layer5 = new google.maps.FusionTablesLayer({
+      query: {
+        select: 'Geometry',
+        from: '1h0bOmdeqAa8jHQbCYAKTvURfZ-tTAHBx89E4buw'
+       },
+        styleId: 2,
+        templateId: 2,
+      map: map, 
+    });
+
 layer1.setMap(map);
 }
-tableidselections = 0;
+
+	tableidselections = 0;
+	
 function changeLayer(tableidselections) {
-if (tableidselections == 1){
-clearmap();
-layer1.setMap(map); }
-if (tableidselections == 2){
-clearmap();
-layer2.setMap(map); }
-if (tableidselections == 3){
-clearmap();
-layer3.setMap(map); }
-if (tableidselections == 4){
-clearmap();
-layer4.setMap(map); }
-}
+
+	if (tableidselections == 1960){
+		clearmap();
+		layer1.setMap(map); }
+
+	if (tableidselections == 1970){
+		clearmap();
+		layer2.setMap(map); }
+		
+	if (tableidselections == 1980){
+		clearmap();
+		layer3.setMap(map); }
+		
+	if (tableidselections == 1990){
+		clearmap();
+		layer4.setMap(map); }
+		
+	if (tableidselections == 2000){
+		clearmap();
+		layer5.setMap(map); }
+		}
+
 function clearmap() {
-layer1.setMap(null);
-layer2.setMap(null);
-layer3.setMap(null);
-layer4.setMap(null);
+	layer1.setMap(null);
+	layer2.setMap(null);
+	layer3.setMap(null);
+	layer4.setMap(null);
+	layer5.setMap(null);
+	
 }
-  </script>
+
+</script>
   <link
  href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900%7CQuicksand:400,700%7CQuestrial"
  rel="stylesheet" />
@@ -114,7 +147,7 @@ Table Slider</a></h1>
  style="width: 1200px; height: 400px;"></div>
 <div id="slider" class="container">
 <h2>Scroll the slider to change Year</h2>
-<input data-slider="true" data-slider-values="1.00,2,3,4"
+<input data-slider="true" data-slider-values="1960,1970,1980,1990,2000"
  data-slider-highlight="true" data-slider-snap="true"
  type="text" /></div>
 <script>
