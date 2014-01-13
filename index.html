@@ -101,9 +101,13 @@ function clearmap() {
 </head>
 
 <body onLoad="initialize()">
-<div id="map_canvas" style="width:900px; height:500px;"></div>
+<div id="map_canvas" style="width:100%; height:500px;"></div>
+<p>Life expectancy at birth, total (years)
+Life expectancy at birth indicates the number of years a newborn infant would live if prevailing patterns of mortality at the time of its birth were to stay the same throughout its life.
+Derived from male and female life expectancy at birth from sources such as: (1) United Nations Population Division. World Population Prospects, (2) United Nations Statistical Division. Population and Vital Statistics Report (various years), (3) Census reports and other statistical publications from national statistical offices, (4) Eurostat: Demographic Statistics, (5) Secretariat of the Pacific Community: Statistics and Demography Programme, and (6) U.S. Census Bureau: International Database.
+Catalog Sources World Development Indicators. </p>
   <h2>Scroll the slider to change maps layers</h2>
-  <input type="text" data-slider="true" data-slider-values="1.00,2,3,4" data-slider-highlight="true"data-slider-snap="true">
+  <input type="text" data-slider="true" data-slider-values="1960.00,1970,1980,2000" data-slider-highlight="true"data-slider-snap="true">
     <script>
    $("[data-slider]")
     .each(function () {
