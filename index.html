@@ -1,7 +1,126 @@
-<!DOCTYPE html>
 <html>
-  <body>
-    <h1>Hello World</h1>
-    <p>I'm hosted with GitHub Pages.</p>
-  </body>
+<head>
+<title>Slider to change fusiontable maps layers</title>
+<link href="https://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="simple-slider.js"></script>
+<link href="simple-slider.css" rel="stylesheet" type="text/css" />
+<link href="simple-slider-volume.css" rel="stylesheet" type="text/css" />  
+
+<script type="text/javascript">
+function initialize() {
+	var myLatLng = new google.maps.LatLng(4.9878199334447695, 53.7890625);
+	map = new google.maps.Map(document.getElementById('map_canvas'), {
+    center: myLatLng,
+    zoom: 3,
+	panControl: false,
+  	zoomControl: true,
+	zoomControlOptions: {
+    position: google.maps.ControlPosition.LEFT_CENTER
+    },
+  	mapTypeControl: false,
+      mapTypeId: 'roadmap'
+    });
+	// Replace the xxx with your Fusion Tables IDs. 
+	//You can use FT Wizard http://fusion-tables-api-samples.googlecode.com/svn/trunk/FusionTablesLayerWizard/src/index.html
+layer1 = new google.maps.FusionTablesLayer({
+      query: {
+        select: 'Geometry',
+        from: '1RVM0V4BN7KUdxxAV9lBtQKy9Wqd804_RdE78Dsc'
+      },
+        styleId: 2,
+        templateId: 2,
+      map: map, 
+    });
+	
+layer2 = new google.maps.FusionTablesLayer({
+      query: {
+        select: 'Geometry',
+        from: '1bcMsQeHuheCfNTqKVy9AD3U_-fJrmxExomI4Rcc'
+       },
+        styleId: 2,
+        templateId: 2,
+      map: map, 
+    });
+
+layer3 = new google.maps.FusionTablesLayer({
+      query: {
+        select: 'Geometry',
+        from: '1RACoMD3bIs95_IKQvRx43k6XtWl04jSxcDQnj6Y'
+       },
+        styleId: 2,
+        templateId: 2,
+      map: map, 
+    });
+
+layer4 = new google.maps.FusionTablesLayer({
+      query: {
+        select: 'Geometry',
+        from: '1h0bOmdeqAa8jHQbCYAKTvURfZ-tTAHBx89E4buw'
+       },
+        styleId: 2,
+        templateId: 2,
+      map: map, 
+    });
+
+layer1.setMap(map);
+}
+
+	tableidselections = 0;
+	
+function changeLayer(tableidselections) {
+
+	if (tableidselections == 1){
+		clearmap();
+		layer1.setMap(map); }
+
+	if (tableidselections == 2){
+		clearmap();
+		layer2.setMap(map); }
+		
+	if (tableidselections == 3){
+		clearmap();
+		layer3.setMap(map); }
+		
+	if (tableidselections == 4){
+		clearmap();
+		layer4.setMap(map); }
+		}
+
+function clearmap() {
+	layer1.setMap(null);
+	layer2.setMap(null);
+	layer3.setMap(null);
+	layer4.setMap(null);
+	
+}
+
+</script>
+
+</head>
+
+<body onLoad="initialize()">
+<div id="map_canvas" style="width:900px; height:500px;"></div>
+  <h2>Scroll the slider to change maps layers</h2>
+  <input type="text" data-slider="true" data-slider-values="1.00,2,3,4" data-slider-highlight="true"data-slider-snap="true">
+    <script>
+   $("[data-slider]")
+    .each(function () {
+      var input = $(this);
+      $("<span>")
+        .addClass("output")
+        .insertAfter($(this));
+    })
+    .bind("slider:ready slider:changed", function (event, data) {
+      $(this)
+        .nextAll(".output:first")
+          .html(data.value.toFixed(0));
+	tableidselections = data.value.toFixed(0);
+      	changeLayer(tableidselections);
+    });
+
+  
+  </script>
+</body>
 </html>
