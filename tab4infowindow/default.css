@@ -337,6 +337,7 @@
 	{
 		text-decoration: none;
 		color: #F67C78;
+		padding-left: 20px;
 	}
 	
 	#logo span
@@ -490,8 +491,9 @@
 	#content
 	{
 		float: left;
-		width: 700px;
-		padding-right: 100px;
+		width: 70%;
+		padding-right: 30px;
+		padding-left: 20px;
 		border-right: 1px solid rgba(0,0,0,.1);
 	}
 	
@@ -502,7 +504,8 @@
 	#sidebar1
 	{
 		float: right;
-		width: 25%;
+		width: 20%;
+		padding-right: 20px;
 	}
 	
 	#sidebar1 h3
@@ -672,7 +675,8 @@
 	#three-column #tbox3
 	{
 		float: left;
-		width: 320px;
+		width: 25%;
+		height:350px;
 		padding: 80px 40px 80px 40px;
 	}
 
