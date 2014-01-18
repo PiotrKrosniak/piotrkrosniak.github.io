@@ -55,7 +55,7 @@
 	.container
 	{
 		margin: 0px auto;
-		width: 1200px;
+		width: 100%;
 	}
 	
 
@@ -502,7 +502,7 @@
 	#sidebar1
 	{
 		float: right;
-		width: 350px;
+		width: 25%;
 	}
 	
 	#sidebar1 h3
