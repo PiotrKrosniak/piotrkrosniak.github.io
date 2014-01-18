@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>jQuery Slider Fusion Table and Google Maps</title>
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+  <script type='text/javascript' src="http://maps.google.com/maps/api/js?sensor=false&dummy=.js"></script>
+ 
+  
+  <style type='text/css'>
+    #map-canvas { width:80%; height: 440px;
+   }
+   #slider {
+   height:11px;
+   left:20px;
+background:url(fill.png)no-repeat left;
+position:relative;
+margin:0;
+padding:0 10px;
+width:230px;
+}
+ 
+/*Style for the slider button*/
+.ui-slider-handle {
+width:24px;
+height:24px;
+position:absolute;
+top:-7px;
+margin-left:-12px;
+z-index:200;
+background:url(slider-button.png);
+}
+ 
+/*Result div where the slider value is displayed*/
+#slider-value {
+font-size:50px;
+height:200px;
+font-family:Arial, Helvetica, sans-serif;
+color:#fff;
+width:250px;
+text-align:center;
+text-shadow:0 1px 1px #000;
+font-weight:700;
+left:20px;
+padding:10px 0;
+}
+a {
+outline:none;
+-moz-outline-style:none;
+}
+  </style>
+<script type="text/javascript">
+    var map;
+    var layer_0;
+    function initialize() {
+      map = new google.maps.Map(document.getElementById('map-canvas'), {
+        center: new google.maps.LatLng(39.77119750801673, 3.1640625),
+        zoom: 2
+      });
+      var style = [
+        {
+          featureType: 'all',
+          elementType: 'all',
+          stylers: [
+            { saturation: -2 }
+          ]
+        }
+      ];
+      var styledMapType = new google.maps.StyledMapType(style, {
+        map: map,
+        name: 'Styled Map'
+      });
+      map.mapTypes.set('map-style', styledMapType);
+      map.setMapTypeId('map-style');
+      layer_0 = new google.maps.FusionTablesLayer({
+        query: {
+          select: "col2",
+          from: "1ExY2P7DxDzTwjz67cs1GPgWKWDPUx5mXE3uZ2ME"
+        },
+        map: map,
+        styleId: 2,
+        templateId: 2
+      });
+    }
+
+// define the JQuery Slider
+$(function() {
+    $('#slider').slider({
+        animate: true,
+		max: 13000000,
+        min: 1000000,
+        step: 100000,
+        value: 0,
+        slide: function(event, ui) {
+            document.getElementById("slider-value").innerHTML = ui.value + " Population";
+            layer_0.setOptions({
+                query: {
+                    select: "Population",
+                    from: "1ExY2P7DxDzTwjz67cs1GPgWKWDPUx5mXE3uZ2ME",
+                    where: "Population <= " +  ui.value
+                }
+            });
+        }
+    });
+});
+</script>
+
+
+</head>
+<body onload="initialize()">
+  <div id="map-canvas"></div>
+<div id="slider" style="top:5px" "width:500px"; 
+
+}></div>
+<div id="slider-value"; style="font-family:Arial Black, Gadget, sans-serif;color:black;font-size:20px;text-align:left"></div>
+
+
+
+
+</div>
+</body>
+
+
+</html>
+
