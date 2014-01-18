@@ -1,4 +1,4 @@
-html{height:100%;}body{height:100%;margin:0px;padding:0px}
+
 .tabs{height:250px;width:350px;overflow-y:hidden}
 .tabs { 
     background: transparent; 
@@ -29,15 +29,14 @@ html{height:100%;}body{height:100%;margin:0px;padding:0px}
 
 #sidebar {
 	position:absolute;
-	left:1130px;
-	top:112px;
+	right:2%;
+	top:25%;
 }
 #sidebar
 {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 	font-size: 12px;
 	background: #fff;
-	margin: 45px;
 	width: 100px;
 	border-collapse: collapse;
 	text-align: left;
@@ -64,4 +63,4 @@ html{height:100%;}body{height:100%;margin:0px;padding:0px}
 
 
 
-#map_canvas{width:800px; height:620px;position:relative}
+#map_canvas{width:95%; height:420px}
