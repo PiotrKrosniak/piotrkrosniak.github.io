@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>TabedInfoWindow for Google Fusion Table Layer Map</title> 
+<link type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script> 	
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+ <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link type="text/css" href="default1.css" rel="stylesheet" media="all" />
+
+<script type="text/javascript"> //Fisrt script to query Table and get data
+var FT_TableID = '13PWhYTPcuF4Bj_uUoiTnerDfuSqo9Fuql6OjXd4';// Fusion Table data ID
+google.load('visualization', '1', {'packages':['corechart', 'table', 'geomap']});
+
+function  createSidebar() { //This line is important, change Table ID and column names
+  var queryText = encodeURIComponent("SELECT 'City','lat','long','Rank','Country' FROM "+'1aQeyRRwIQelHOkxDHgZlUuoFgpuE0PgfVkOfEGw');
+  var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq='  + queryText);
+  
+query.send(getData);//set the callback function
+
+}
+  
+  google.setOnLoadCallback(createSidebar);// Set a callback to run when the Google Visualization API is loaded.
+</script>
+<script type="text/javascript"> //Second sript to create sidebar
+var geocoder= new google.maps.Geocoder();
+var FTresponse = null;
+
+function getData(response) { //define callback function, this is called when the results are returned
+if (!response) {
+  alert('no response');
+  return;
+}
+if (response.isError()) {
+  alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+  return;
+} 
+  FTresponse = response;
+  numRows = response.getDataTable().getNumberOfRows();
+  numCols = response.getDataTable().getNumberOfColumns();
+  
+  
+  fusiontabledata = "<table><tr>";//concatenate the results into a string, you can build a table here
+  fusiontabledata += "<th>" + response.getDataTable().getColumnLabel(0) + "</th>";
+  fusiontabledata += "</tr><tr>";
+  
+  for(i = 0; i < numRows; i++) {
+//    for(j = 0; j < numCols; j++) {
+      fusiontabledata += "<td><a href='javascript:myFTclick("+i+")'>"+response.getDataTable().getValue(i, 0) + "</a></td>";
+//    }
+    fusiontabledata += "</tr><tr>";
+  }
+  fusiontabledata += "</table>"  
+  //display the results on the page
+  document.getElementById('sidebar').innerHTML = fusiontabledata;
+}
+
+function openInfoWindowGeocoded(address, name, focusArea, contact, contactAlt){
+    if (geocoder) {
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+          map.setCenter(results[0].geometry.location);
+          openInfoWindow(results[0].geometry.location, name, focusArea, contact, contactAlt, address);
+
+          } else {
+            alert("No results found");
+          }
+        } else {
+          alert("Geocode was not successful for the following reason: " + status);
+        }
+      });
+    }
+}
+{
+    
+}
+function myFTclick(row) {
+   var City = FTresponse.getDataTable().getValue(row,0);
+   var lat = FTresponse.getDataTable().getValue(row,3);
+   var Rank = FTresponse.getDataTable().getValue(row,3);
+   var Country = FTresponse.getDataTable().getValue(row,3);
+   var latlng =  FTresponse.getDataTable().getValue(row,1);
+   if (latlng.indexOf("<") == -1) {
+     var coords = latlng.split(',');
+     var lat = parseFloat(coords[0]);
+     var lng = parseFloat(coords[1]);
+     if (isNaN(lat) || isNaN(lng)) {
+       // assume address, send to geocoder
+       openInfoWindowGeocoded(City, lat, Rank, Country);
+     }
+     var position = new google.maps.LatLng(lat,lng);
+   }
+}
+
+function addClickHandler(FTLayer) {
+  google.maps.event.addListener(FTLayer, "click", function(event) {
+    if (infoWindow) infoWindow.close();
+    infoWindow.setOptions({pixelOffset:null, 
+                           content:event.infoWindowHtml,
+                           position:event.latLng
+                          });
+    infoWindow.open(map);
+  });
+var map = null;
+var geocoder = null;
+var infoWindow = null;
+var query = "";
+var info = null;
+  
+  
+  layer1 = new google.maps.FusionTablesLayer(FT_TableID, {suppressInfoWindows:true}); //now create a layer of just the markers, change the Column name
+  layer1.setQuery("SELECT City FROM " + FT_TableID);
+  layer1.setMap(map);
+  addClickHandler(layer1);
+  
+  infoWindow = new google.maps.InfoWindow(); 
+  geocoder = new google.maps.Geocoder();
+  
+}
+
+</script> 
+<script type="text/javascript">//Next script load map and infowindows 
+var roadAtlasStyles = [
+    {
+      featureType: 'all',
+      elementType: 'all',
+      stylers: [
+        { saturation: -90 }
+      ]
+    }
+  ];
+var infowindow;
+var map;
+var layer;
+var tableid = '1r4egxlD-9QeK-4gBrdtTGQFrhdrBoxNhBwQbWUc';
+var zoom = 2;
+var latlng = new google.maps.LatLng(21.994542046671665, -19.86720112499999);
+function initialize() {
+map = new google.maps.Map(document.getElementById('map_canvas'), {						
+center: latlng,
+zoom: zoom,
+streetViewControl: false,
+mapTypeControl: true,
+mapTypeIds: [google.maps.MapTypeId.SATELLITE, 'usroadatlas'],
+scrollwheel: true,
+navigationControl: true,
+navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL,
+position: google.maps.ControlPosition.TOP_LEFT}
+});
+var styledMapOptions = {
+name: "Styled"  
+};
+var usRoadMapType = new google.maps.StyledMapType(
+roadAtlasStyles, styledMapOptions);
+map.mapTypes.set('usroadatlas', usRoadMapType);
+map.setMapTypeId('usroadatlas')
+layer = new google.maps.FusionTablesLayer(tableid, {
+suppressInfoWindows: true,
+styleId: 2, 
+map: map
+ });
+
+  // Add a click listener to the layer that creates a new infowindow
+  // with directions text input
+  google.maps.event.addListener(layer, 'click', function(e) {
+    if(infowindow) infowindow.close();
+    else infowindow = new google.maps.InfoWindow();
+    	infowindow.setContent(
+	'<div class="tabs">' +
+    '<ul>' +
+    '<li><a href="#tab-1"><span>Welcome</span></a></li>' + //tabs names
+    '<li><a href="#tab-2"><span>Chart</span></a></li>' + //tabs names
+    '</ul>' +
+    '<div id="tab-1">' + //second tab content
+    '<p>Country: <b>' + e.row['Country_Name'].value + '</tr></b></p>' +
+    '</div>' +
+	'<div id="tab-2">' + //firts tab content 
+	'<iframe src="https://www.google.com/fusiontables/embedviz?containerId=googft-gviz-canvas&q=select+col0%2C+col1%2C+col2%2Ccol3+from+1r4egxlD-9QeK-4gBrdtTGQFrhdrBoxNhBwQbWUc+%20WHERE%20Country_Name=%27'+ e.row['Country_Name'].value +'%27+order+by+col1+asc+limit+10&viz=GVIZ&t=COLUMN&uiversion=2&gco_forceIFrame=true&gco_hasLabelsColumn=true&att=true&gco_theme=maximized&width=300&height=150"frameborder="0"; scrolling="no"/>' +
+	'</div>');
+    infowindow.setPosition(e.latLng);
+    infowindow.open(map);
+	$(".tabs").tabs();
+  });
+infoWindow = new google.maps.InfoWindow(); 
+}
+
+
+</script> 
+  <link
+ href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900%7CQuicksand:400,700%7CQuestrial"
+ rel="stylesheet" />
+  <link href="default.css" rel="stylesheet"
+ type="text/css" media="all" />
+  <link href="fonts.css" rel="stylesheet"
+ type="text/css" media="all" />
+<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+</head>
+<body onload="initialize()">
+<a href="https://github.com/piotrkrosniak"><img
+ title="Fork me on GitHub"
+ style="border: 0px solid ; position: absolute; top: 0pt; right: 0pt; width: 149px; height: 149px;"
+ src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"
+ alt="Fork me on GitHub" /></a>
+<div id="header-wrapper">
+<div id="header" class="container">
+<div id="logo">
+<h1><a target="_blank"
+ href="https://github.com/PiotrKrosniak">InfoWindow charts</a></h1>
+<hr style="border-top: 1px dotted;" /></div>
+<div id="menu">
+</div>
+</div>
+<div id="map_canvas" class="container"
+ style="width: 1200px; height: 400px;"></div>
+
+</div>
+</div>
+<div id="page-wrapper">
+<div id="page" class="container">
+<div id="content">
+<div class="title">
+<h2>Title</h2>
+</div>
+<p> </a>
+</p>
+</div>
+<div id="sidebar1">
+<div class="title">
+<h2>Project Info </h2>
+</div>
+<ul style="font-weight: bold;" class="default">
+  <li><span ="">
+    <p>text</p>
+    </span></li>
+</ul>
+<div class="section">
+
+
+</span></div>
+</div>
+</div>
+</div>
+<div class="wrapper">
+<div id="three-column" class="container">
+<div id="tbox1">
+<div class="title">
+<h2>Fork me on GitHub</h2>
+</div>
+<p>This project it's a collaborative project and that you're
+welcomed to add improvements.You are granted full rights to contribute
+to the project or use it as a starting point for your own project.</p>
+<a target="_blank"
+ href="https://github.com/PiotrKrosniak/FusionTablesSlider/fork"
+ class="button">Learn More</a> </div>
+<div id="tbox2">
+<div class="title">
+<h2>Visit my blog </h2>
+</div>
+<p>On my blog you can find tutorials about Geographic Information
+System (GIS),Google Maps and how to use Google Fusion table in data
+visualization. Please visit me !</p>
+<a target="_blank" href="http://piotrgisworks.blogspot.com/"
+ class="button">Learn
+More</a> </div>
+<div id="tbox3">
+<div class="title">
+<h2>&nbsp;JQuery</h2>
+</div>
+<p>jQuery is a cross-platform JavaScript library designed to
+simplify the client-side scripting of HTML. It was released in January
+2006 at BarCamp NYC by John Resig. jQuery is the most popular
+JavaScript library in use today</p>
+<a target="_blank" href="http://jquery.com/"
+ class="button">Learn
+More</a> </div>
+</div>
+</div>
+</body>
+</html>
