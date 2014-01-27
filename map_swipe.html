@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <title>Bootply.com - Greenfield Template</title>
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+        <!--[if lt IE 9]>
+          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+	<link src="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+
+<style type="text/css">
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600');
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+#before,#after {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#before,#after {
+  width:600px
+}
+/* fix bs3 horizontal scrollbar bug */
+.row { margin: 0; padding: 0 }
+
+h1 {
+  font-size:50px; 
+}
+
+
+.icon-bar {
+   background-color:#fff;
+}
+
+.scroll-down a, .scroll-top a {
+   color:#ffffff;
+}
+
+.scroll-down {
+   position:fixed;
+   bottom:20%;
+   right:0%;
+   color:#f9f9f9;
+}
+
+.scroll-top {
+  background-color:#33ee67;
+}
+
+.header .btn-lg {
+   font-size:28px;
+   border-color:#eeeeee;
+   padding:15px;
+   background-color:transparent;
+   color:#ffffff;
+}
+
+.header .btn-lg:hover {
+   background-color:#eeeeee;
+   color:#777777;
+}
+
+.navbar a {
+  color:#fff;
+}
+
+.navbar-bold.affix {
+  background-color:#33ee67;
+}
+
+.navbar-bold {
+  background-color:#11cc45;
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.navbar-bold li a:hover {
+  background-color:#00bb34;
+}
+
+.navbar-bold li.active {
+  background-color:#00bb34;
+}
+
+.vert {
+  vertical-align: middle;
+  width:100%;
+  padding-top:4%;
+}
+
+.header h1 {
+  font-size:110px;
+  -webkit-text-stroke: 1px rgba(0,0,0,0.1);
+  color:#431a6d;
+  color:#fff;
+  margin-left:-5px;
+  margin-bottom:5px;
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.header .lead {
+  color:#eeeeee;
+  font-size:25px;
+}
+
+.header {
+  height: 80%;
+
+}
+
+.blurb {
+  padding: 120px 0;
+  background-color:#fefefe;
+}
+
+.blurb .panel {
+  background-color:transparent;
+}
+
+.bright {
+  background: #7fbbda url('http://www.bootply.com/assets/example/bg_suburb.jpg') no-repeat center center fixed; 
+  color:#fff;
+}
+
+.featurette {
+  background: #545455;
+  padding: 50px 0;
+  color: #ffffff;
+}
+
+.featurette-item {
+  margin-bottom: 15px;
+}
+
+.featurette-item > i {
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 56px;
+  width: 140px;
+  height: 140px;
+  line-height: 136px;
+  vertical-align: middle; 
+  text-align: center;
+}
+
+.featurette-item > i:hover {
+  font-size: 68px;
+}
+
+.callout {
+  color: #ffffff;
+  padding-top:7%;
+  height: 100%;
+  width: 100%;
+  background: url('http://www.bootply.com/assets/example/bg_suburb.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.gallery {
+  padding: 50px 0;
+}
+
+.call-to-action {
+  background: #eeeeee;
+  padding: 50px 0;
+}
+
+.call-to-action .btn {
+  margin: 10px;
+}
+
+footer {
+  padding: 100px 0;
+}
+#switcher, #before, #after {position:absolute; cursor:move;}
+#switcher {
+margin-left:200px;
+}
+#after {min-width:50px; border-right:10px solid rgba(0,0,0,.5); }
+
+</style>
+<script type="text/javascript">
+      function initialize() {
+        var latlng = new google.maps.LatLng(40.7562008,-73.9903784);
+        var latlng2 = new google.maps.LatLng(40.7562008,-73.9903784);
+        var myOptions = {
+        zoom: 8,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var myOptions2 = {
+        zoom: 8,
+        center: latlng2,
+        mapTypeId: google.maps.MapTypeId.HYBRID
+        };
+        var map = new google.maps.Map(document.getElementById("before"), myOptions);
+        var map2 = new google.maps.Map(document.getElementById("after"), myOptions2);
+      }
+    </script>
+<script>
+jQuery(document).ready(function(){
+$("#switcher").mousemove(function(e){
+var a = $("#switcher").offset();
+var x = e.pageX - a.left;
+$('#after').width(x);
+});
+}); 
+</script>
+    </head>
+    
+<body onload="initialize()">
+        
+        
+<div class="navbar navbar-fixed-top navbar-bold" data-spy="affix" data-offset-top="1000">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand">GitHub</a>
+      <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav">
+        <li><a href="#sec1">Simple Slider</a></li>
+        <li><a href="#sec2">Layers Slider</a></li>
+        <li><a href="#sec3">Chart InfoWindow</a></li>
+      </ul>
+    </div>
+   </div>
+</div>
+
+<div class="header">
+  <div class="container">
+      <div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+     <p> 
+<div id='switcher'>  
+<div id="before"style="width:900px; height:300px;"></div>
+<div id="after" style="width:900px; height:300px;"></div>
+<hr></p>
+  </div>
+</div>
+</div>
+
+<div id="sec1">
+ <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+          Life expectancy at birth, total (years 1960-2000) Life expectancy at birth, total (years) Life expectancy at birth indicates the number of years a newborn infant would live if prevailing patterns of mortality at the time of its birth were to stay the same throughout its life. Derived from male and female life expectancy at birth from sources such as: (1) United Nations Population Division. World Population Prospects, (2) United Nations Statistical Division. Population and Vital Statistics Report (various years), (3) Census reports and other statistical publications from national statistical offices, (4) Eurostat: Demographic Statistics, (5) Secretariat of the Pacific Community: Statistics and Demography Programme, and (6) U.S. Census Bureau: International Database. Catalog Sources World Development Indicators. Word Ban
+<hr>
+        </div>
+        <div class="col-md-6">
+            Life expectancy at birth, total (years 1960-2000) Life expectancy at birth, total (years) Life expectancy at birth indicates the number of years a newborn infant would live if prevailing patterns of mortality at the time of its birth were to stay the same throughout its life. Derived from male and female life expectancy at birth from sources such as: (1) United Nations Population Division. World Population Prospects, (2) United Nations Statistical Division. Population and Vital Statistics Report (various years), (3) Census reports and other statistical publications from national statistical offices, (4) Eurostat: Demographic Statistics, (5) Secretariat of the Pacific Community: Statistics and Demography Programme, and (6) U.S. Census Bureau: International Database. Catalog Sources World Development Indicators. Word Ban
+<hr>
+        </div>
+    </div>
+</div>
+
+
+<div class="blurb bright">
+  
+  <div class="row">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        <h3></h3>
+        <br>
+      </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-2">
+         <div class="panel panel-default">
+         <div class="panel-heading text-center"><h2><i class="icon-chevron-left"></i> Fork Me on GitHub</h2></div>
+         <div class="panel-body text-center">This project it's a collaborative project and that you're welcomed to add improvements.You are granted full rights to contribute to the project or use it as a starting point for your own project.
+
+Learn More<hr>
+          <button class="btn btn-lg btn-primary btn-block">Click for more</button> 
+          </div>
+         </div>
+ 	</div>
+    <div class="col-sm-4">
+         <div class="panel panel-default">
+         <div class="panel-heading text-center"><h2>Visit my Blog  <i class="icon-chevron-right"></i></h2></div>
+         <div class="panel-body text-center">On my blog you can find tutorials about Geographic Information System (GIS), Google Maps API and how to use Google Fusion table in data visualization. 
+Please visit me !       <hr>
+          <button class="btn btn-lg btn-primary btn-block">Click for more</button> 
+           
+          </div>
+         </div>
+ 	</div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        <ul class="list-inline">
+          <li><i class="icon-facebook icon-2x"></i></li>
+          <li><i class="icon-twitter icon-2x"></i></li>
+          <li><i class="icon-google-plus icon-2x"></i></li>
+          <li><i class="icon-pinterest icon-2x"></i></li>
+        </ul>
+        <hr>
+        <p>Built with <i class="icon-heart-empty"></i> at <a href="http://www.bootply.com">Bootply</a>.<br></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<ul class="nav pull-right scroll-down">
+  <li><a href="#" title="Scroll down"><i class="icon-chevron-down icon-3x"></i></a></li>
+</ul>
+<ul class="nav pull-right scroll-top">
+  <li><a href="#" title="Scroll to top"><i class="icon-chevron-up icon-3x"></i></a></li>
+</ul>
+
+        
+       
+
+
+        <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+
+
+        
+        <!-- JavaScript jQuery code from Bootply.com editor -->
+        
+        <script type='text/javascript'>
+        
+        $(document).ready(function() {
+        
+            /* smooth scrolling for scroll to top */
+$('.scroll-top').click(function(){
+  $('body,html').animate({scrollTop:0},1000);
+})
+/* smooth scrolling for scroll down */
+$('.scroll-down').click(function(){
+  $('body,html').animate({scrollTop:$(window).scrollTop()+800},1000);
+})
+
+/* highlight the top nav as scrolling occurs */
+$('body').scrollspy({ target: '#navbar' })
+
+        
+        });
+        
+        </script>
+        
+    </body>
+</html>
