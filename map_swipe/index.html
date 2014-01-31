@@ -34,6 +34,10 @@
       map = new google.maps.Map(document.getElementById('before'), {
         center: new google.maps.LatLng(9.693646841383933, -11.42578125),
         zoom: 2,
+		scrollwheel: false,
+		navigationControl: false,
+		mapTypeControl: false,
+		draggable: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       });
       layer_0 = new google.maps.FusionTablesLayer({
@@ -42,7 +46,7 @@
           from: "1bcMsQeHuheCfNTqKVy9AD3U_-fJrmxExomI4Rcc"
         },
         map: map,
-        styleId: 2,
+		styleId: 2,
         templateId: 2
       });
     }
@@ -55,6 +59,10 @@ var map;
       map = new google.maps.Map(document.getElementById('after'), {
         center: new google.maps.LatLng(9.693646841383933, -11.42578125),
         zoom: 2,
+		scrollwheel: false,
+		navigationControl: false,
+		mapTypeControl: false,
+		draggable: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       });
       layer_0 = new google.maps.FusionTablesLayer({
