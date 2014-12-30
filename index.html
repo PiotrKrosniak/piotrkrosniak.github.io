@@ -1,3 +1,4 @@
+            
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -9,10 +10,10 @@
  src="https://maps.google.com/maps/api/js?sensor=false"></script>
   <script
  src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-  <script src="simple-slider.js"></script>
-  <link href="simple-slider.css" rel="stylesheet"
+  <script src="http://piotrkrosniak.github.io/simple-slider.js"></script>
+  <link href="http://piotrkrosniak.github.io/simple-slider.css" rel="stylesheet"
  type="text/css" />
-  <link href="simple-slider-volume.css" rel="stylesheet"
+  <link href="http://piotrkrosniak.github.io/simple-slider-volume.css" rel="stylesheet"
  type="text/css" />
   <script type="text/javascript">
 function initialize() {
@@ -32,8 +33,8 @@ function initialize() {
 	//You can use FT Wizard http://fusion-tables-api-samples.googlecode.com/svn/trunk/FusionTablesLayerWizard/src/index.html
 layer1 = new google.maps.FusionTablesLayer({
       query: {
-        select: 'Geometry',
-        from: '1RVM0V4BN7KUdxxAV9lBtQKy9Wqd804_RdE78Dsc'
+        select: 'geometry',
+        from: '1sARycbyEEl8obP2dq7o0ZLbCVqI7Ez-N4cjISCA5'   //1950
       },
         styleId: 2,
         templateId: 2,
@@ -42,8 +43,8 @@ layer1 = new google.maps.FusionTablesLayer({
 	
 layer2 = new google.maps.FusionTablesLayer({
       query: {
-        select: 'Geometry',
-        from: '1bcMsQeHuheCfNTqKVy9AD3U_-fJrmxExomI4Rcc'
+        select: 'geometry',
+        from: '1Cfy8KVorYYcz6QOqIGAg_X4BpsQ7u5UK1ZVbdyo3'   //1960
        },
         styleId: 2,
         templateId: 2,
@@ -53,7 +54,7 @@ layer2 = new google.maps.FusionTablesLayer({
 layer3 = new google.maps.FusionTablesLayer({
       query: {
         select: 'Geometry',
-        from: '1RACoMD3bIs95_IKQvRx43k6XtWl04jSxcDQnj6Y'
+        from: '10_g5zMJY8aEzE5eNUe00RUPleaGijqrhcx651lQV'    //1970
        },
         styleId: 2,
         templateId: 2,
@@ -63,7 +64,7 @@ layer3 = new google.maps.FusionTablesLayer({
 layer4 = new google.maps.FusionTablesLayer({
       query: {
         select: 'Geometry',
-        from: '1k_Nnxq88xakXVB4Yi1-10W-y2_gcF5JdpI3Drow'
+        from: '1lQSIMpLdl0HI2hq_vhPz0FTdbzoXEn3Yx9gqgWqY'     //1980
        },
         styleId: 2,
         templateId: 2,
@@ -73,39 +74,81 @@ layer4 = new google.maps.FusionTablesLayer({
 layer5 = new google.maps.FusionTablesLayer({
       query: {
         select: 'Geometry',
-        from: '1h0bOmdeqAa8jHQbCYAKTvURfZ-tTAHBx89E4buw'
+        from: '11enrFB5xvIp_vPn-ZBBt3XFkPCqKiLsQv_IWD7y4'       //1990
+       },
+        styleId: 2,
+        templateId: 2,
+      map: map, 
+    });
+    
+layer6 = new google.maps.FusionTablesLayer({
+      query: {
+        select: 'Geometry',
+        from: '1yD-zUilJqgCMertIYiU6y3l-waiSrIouwl7A-mUK'       //2000
+       },
+        styleId: 2,
+        templateId: 2,
+      map: map, 
+    });
+    
+layer7 = new google.maps.FusionTablesLayer({
+      query: {
+        select: 'Geometry',
+        from: '1f2K7FpLQKdi52_j_VHWmMlDhOpSQh5ppejGhVil3'       //2010
+       },
+        styleId: 2,
+        templateId: 2,
+      map: map, 
+    });
+    
+layer8 = new google.maps.FusionTablesLayer({
+      query: {
+        select: 'Geometry',
+        from: '1VZ6A75d3w-gMhkVAvqvAle2xBGgQuGbk9ndy_XQa'       //2013
        },
         styleId: 2,
         templateId: 2,
       map: map, 
     });
 
-layer1.setMap(map);
+layer9.setMap(map);
 }
 
 	tableidselections = 0;
 	
 function changeLayer(tableidselections) {
 
-	if (tableidselections == 1960){
+	if (tableidselections == 1950){
 		clearmap();
 		layer1.setMap(map); }
 
-	if (tableidselections == 1970){
+	if (tableidselections == 1960){
 		clearmap();
 		layer2.setMap(map); }
 		
-	if (tableidselections == 1980){
+	if (tableidselections == 1970){
 		clearmap();
 		layer3.setMap(map); }
 		
-	if (tableidselections == 1990){
+	if (tableidselections == 1980){
 		clearmap();
 		layer4.setMap(map); }
 		
-	if (tableidselections == 2000){
+	if (tableidselections == 1990){
 		clearmap();
 		layer5.setMap(map); }
+	
+  if (tableidselections == 2000){
+		clearmap();
+		layer6.setMap(map); }
+		
+  if (tableidselections == 2010){
+		clearmap();
+		layer7.setMap(map); }
+		
+  if (tableidselections == 2013){
+		clearmap();
+		layer8.setMap(map); }
 		}
 
 function clearmap() {
@@ -114,16 +157,20 @@ function clearmap() {
 	layer3.setMap(null);
 	layer4.setMap(null);
 	layer5.setMap(null);
-	
+  layer6.setMap(null);
+	layer7.setMap(null);
+	layer8.setMap(null);
+
+
 }
 
 </script>
   <link
  href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900%7CQuicksand:400,700%7CQuestrial"
  rel="stylesheet" />
-  <link href="default.css" rel="stylesheet"
+  <link href="http://piotrkrosniak.github.io/default.css" rel="stylesheet"
  type="text/css" media="all" />
-  <link href="fonts.css" rel="stylesheet"
+  <link href="http://piotrkrosniak.github.io/fonts.css" rel="stylesheet"
  type="text/css" media="all" />
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
 </head>
@@ -137,8 +184,7 @@ function clearmap() {
 <div id="header" class="container">
 <div id="logo">
 <h1><a target="_blank"
- href="https://github.com/PiotrKrosniak/FusionTablesSlider">Fusion
-Table Slider</a></h1>
+ href="https://github.com/PiotrKrosniak/FusionTablesSlider">Under-five mortality rate 1950-2013</a></h1>
 <hr style="border-top: 1px dotted;" /></div>
 <div id="menu">
 </div>
@@ -146,8 +192,8 @@ Table Slider</a></h1>
 <div id="map_canvas" class="container"
  style="width: 1200px; height: 400px;"></div>
 <div id="slider" class="container">
-<h2>Scroll the slider to change Year</h2>
-<input data-slider="true" data-slider-values="1960,1970,1980,1990,2000"
+<h3>Drag the slider to change Year</h3>
+<input data-slider="true" data-slider-values="1950,1960,1970,1980,1990,2000,2010,2013"
  data-slider-highlight="true" data-slider-snap="true"
  type="text" /></div>
 <script>
@@ -170,24 +216,13 @@ changeLayer(tableidselections);
 <div id="page" class="container">
 <div id="content">
 <div class="title">
-<h2>Life expectancy at birth, total (years 1960-2000)</h2>
+<h2>Under-five mortality rate (Trend data including uncertainty ranges) </h2>
 </div>
 <p>
-Life expectancy at birth, total (years) Life expectancy at birth
-indicates the number of years a newborn infant would live if prevailing
-patterns of mortality at the time of its birth were to stay the same
-throughout its life.&nbsp;</p>
-<p>Derived from male and female life expectancy at birth from
-sources such as: (1) United Nations Population Division. World
-Population Prospects, (2) United Nations Statistical Division.
-Population and Vital Statistics Report (various years), (3) Census
-reports and other statistical publications from national statistical
-offices, (4) Eurostat: Demographic Statistics, (5) Secretariat of the
-Pacific Community: Statistics and Demography Programme, and (6) U.S.
-Census Bureau: International Database. Catalog Sources World
-Development Indicators.</p>
-<p><a href="http://data.worldbank.org/indicator/SP.DYN.LE00.IN"
- target="_blank">Word Bank </a>
+</p>
+
+<p><a href="http://data.unicef.org/child-mortality/under-five"
+ target="_blank">UNICEF </a>
 </p>
 </div>
 <div id="sidebar">
