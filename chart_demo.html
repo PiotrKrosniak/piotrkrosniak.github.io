@@ -7,73 +7,44 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <link type="text/css" href="default1.css" rel="stylesheet" media="all" />
-<script type="text/javascript">//Script to load map and infowindows 
-var roadAtlasStyles = [
-    {
-      featureType: 'all',
-      elementType: 'all',
-      stylers: [
-        { saturation: -90 }
-      ]
-    }
-  ];
-var infowindow;
-var map;
-var layer;
-var tableid = '1P28sWgc985BXaxYgyZ_-lLBFwXsjcwjYUaUA6eg';
-var zoom = 2;
-var latlng = new google.maps.LatLng(21.994542046671665, -19.86720112499999);
+</style>
+        
+    <script type="text/javascript">
 function initialize() {
-map = new google.maps.Map(document.getElementById('map_canvas'), {						
-center: latlng,
-zoom: zoom,
-streetViewControl: false,
-mapTypeControl: true,
-mapTypeIds: [google.maps.MapTypeId.SATELLITE, 'usroadatlas'],
-scrollwheel: true,
-navigationControl: true,
-navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL,
-position: google.maps.ControlPosition.TOP_LEFT}
-});
-var styledMapOptions = {
-name: "Styled"  
-};
-var usRoadMapType = new google.maps.StyledMapType(
-roadAtlasStyles, styledMapOptions);
-map.mapTypes.set('usroadatlas', usRoadMapType);
-map.setMapTypeId('usroadatlas')
-layer = new google.maps.FusionTablesLayer(tableid, {
-suppressInfoWindows: true,
-styleId: 2, 
-map: map
- });
+    map = new google.maps.Map(document.getElementById('map-canvas'), {
+      center: new google.maps.LatLng(29.296435107347698, -29.54822280000008),
+      zoom: 2,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
 
-  // Add a click listener to the layer that creates a new infowindow
-  // with directions text input
-  google.maps.event.addListener(layer, 'click', function(e) {
-    if(infowindow) infowindow.close();
-    else infowindow = new google.maps.InfoWindow();
-    	infowindow.setContent(
-	'<div class="tabs">' +
-    '<ul>' +
-    '<li><a href="#tab-1"><span>Welcome</span></a></li>' + //tabs names
-    '<li><a href="#tab-2"><span>Chart</span></a></li>' + //tabs names
-    '</ul>' +
-    '<div id="tab-1">' + //second tab content
-    '<p>Country: <b>' + e.row['Country_Name'].value + '</tr></b></p>' +
-    '</div>' +
-	'<div id="tab-2">' + //firts tab content 
-        node.innerHTML= '<iframe src="https://www.google.com/fusiontables/embedviz?containerId=googft-gviz-canvas&q=select+col0%2C+col9%2C+col10%2Ccol11+from+1P28sWgc985BXaxYgyZ_-lLBFwXsjcwjYUaUA6eg+%20WHERE%20name=%27'+ e.row['name'].value +'%27+order+by+col1+asc+limit+10&viz=GVIZ&t=COLUMN&uiversion=2&gco_forceIFrame=true&gco_hasLabelsColumn=true&att=true&gco_theme=maximized&width=300&height=150"frameborder="0"; scrolling="no"/>';
-	'</div>');
-    infowindow.setPosition(e.latLng);
-    infowindow.open(map);
-	$(".tabs").tabs();
-  });
-infoWindow = new google.maps.InfoWindow(); 
-}
+    var layer = new google.maps.FusionTablesLayer({
+      query: {
+        select: 'col0',
+        from: '1P28sWgc985BXaxYgyZ_-lLBFwXsjcwjYUaUA6eg'
+      },
+      map: map,
+        //don't use the infowindows of the FTLayer
+      suppressInfoWindows:true
+    });
+      //a custom infowindow
+    infowindow=new google.maps.InfoWindow();
 
 
-</script> 
+    google.maps.event.addListener(layer, 'click', function(e) {
+      //call drawVisualization when the infowindow is ready
+      google.maps.event.addListenerOnce(infowindow,'domready',function(){
+       
+      });
+        //create the content for the infowindow
+      var node=document.createElement('div');
+      node.innerHTML= '<iframe src="https://www.google.com/fusiontables/embedviz?containerId=googft-gviz-canvas&q=select+col0%2C+col9%2C+col10%2Ccol11+from+1P28sWgc985BXaxYgyZ_-lLBFwXsjcwjYUaUA6eg+%20WHERE%20name=%27'+ e.row['name'].value +'%27+order+by+col1+asc+limit+10&viz=GVIZ&t=COLUMN&uiversion=2&gco_forceIFrame=true&gco_hasLabelsColumn=true&att=true&gco_theme=maximized&width=300&height=150"frameborder="0"; scrolling="no"/>';
+      infowindow.setOptions({position:e.latLng,content:node,map:map});
+     });
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
   <link
  href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900%7CQuicksand:400,700%7CQuestrial"
  rel="stylesheet" />
