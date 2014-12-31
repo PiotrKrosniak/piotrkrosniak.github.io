@@ -20,7 +20,7 @@ var roadAtlasStyles = [
 var infowindow;
 var map;
 var layer;
-var tableid = '1RVM0V4BN7KUdxxAV9lBtQKy9Wqd804_RdE78Dsc';
+var tableid = '1P28sWgc985BXaxYgyZ_-lLBFwXsjcwjYUaUA6eg';
 var zoom = 2;
 var latlng = new google.maps.LatLng(21.994542046671665, -19.86720112499999);
 function initialize() {
@@ -63,7 +63,8 @@ map: map
     '<p>Country: <b>' + e.row['Country_Name'].value + '</tr></b></p>' +
     '</div>' +
 	'<div id="tab-2">' + //firts tab content 
-	'<iframe src="https://www.google.com/fusiontables/embedviz?containerId=googft-gviz-canvas&q=select+col2%3E%3E0%2C+col3%3E%3E0%2C+col4%3E%3E0%2C+col5%3E%3E0%2C+col6%3E%3E0+from+1RVM0V4BN7KUdxxAV9lBtQKy9Wqd804_RdE78Dsc+%20WHERE%20Country_Name=%27'+ e.row['Country_Name'].value +'%27order+by+col3%3E%3E0+asc+limit+1&viz=GVIZ&t=COLUMN&uiversion=2&gco_forceIFrame=true&gco_hasLabelsColumn=true&gco_theme=maximized&gco_title=Life+expectancy+at+birth&width=300&height=150"frameborder="0"; scrolling="no"/>' +
+        node.innerHTML= '<iframe src="https://www.google.com/fusiontables/embedviz?containerId=googft-gviz-canvas&q=select+col0%2C+col9%2C+col10%2Ccol11+from+1P28sWgc985BXaxYgyZ_-lLBFwXsjcwjYUaUA6eg+%20WHERE%20name=%27'+ e.row['name'].value +'%27+order+by+col1+asc+limit+10&viz=GVIZ&t=COLUMN&uiversion=2&gco_forceIFrame=true&gco_hasLabelsColumn=true&att=true&gco_theme=maximized&width=300&height=150"frameborder="0"; scrolling="no"/>';
+         infowindow.setOptions({position:e.latLng,content:node,map:map});
 	'</div>');
     infowindow.setPosition(e.latLng);
     infowindow.open(map);
