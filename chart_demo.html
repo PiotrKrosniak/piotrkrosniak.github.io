@@ -64,7 +64,6 @@ map: map
     '</div>' +
 	'<div id="tab-2">' + //firts tab content 
         node.innerHTML= '<iframe src="https://www.google.com/fusiontables/embedviz?containerId=googft-gviz-canvas&q=select+col0%2C+col9%2C+col10%2Ccol11+from+1P28sWgc985BXaxYgyZ_-lLBFwXsjcwjYUaUA6eg+%20WHERE%20name=%27'+ e.row['name'].value +'%27+order+by+col1+asc+limit+10&viz=GVIZ&t=COLUMN&uiversion=2&gco_forceIFrame=true&gco_hasLabelsColumn=true&att=true&gco_theme=maximized&width=300&height=150"frameborder="0"; scrolling="no"/>';
-         infowindow.setOptions({position:e.latLng,content:node,map:map});
 	'</div>');
     infowindow.setPosition(e.latLng);
     infowindow.open(map);
